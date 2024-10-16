@@ -1,0 +1,114 @@
+@import "../../style.scss";.navbar {
+  @include themify($themes) {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    height: 60px;
+    border-bottom: 1px solid themed("border");
+    position: sticky;
+    top: 0;
+    background-color: themed("bg");
+    color: themed("textColor");
+    z-index: 999;
+
+    .left {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+
+      span {
+        font-size: 1.5rem; // Adjust font size for better visibility
+        font-weight: bold;
+        color: themed("logo"); // Use the logo color for consistency
+        transition: color 0.3s ease; // Smooth color transition
+
+        &:hover {
+          color: themed("accent"); // Change color on hover for better interaction
+        }
+      }
+    }
+
+    .middle {
+      display: flex;
+      flex: 1;
+      align-items: center;
+      margin-left: 20px;
+      
+      .search {
+        width: 100%;
+        max-width: 400px;
+        padding: 8px 12px;
+        border: 1px solid transparent;
+        border-radius: 20px;
+        background-color: themed("bgSoft");
+        color: themed("textColorSoft");
+        transition: border-color 0.3s ease; // Smooth border color transition
+
+        &:focus {
+          outline: none;
+          border-color: themed("border");
+        }
+        
+        .ant-input{
+          &::placeholder{
+            color: themed("textColorSoft");
+            opacity: 0.7;
+          }
+        }
+        .ant-input-suffix{
+          font-size: large;
+          color: themed("logo"); 
+       }
+        
+      }
+    }
+
+    .right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+
+      .icon {
+        font-weight: bold;
+        font-size: 20px;
+        color: themed("logo");
+        transition: color 0.3s ease; // Smooth color transition
+      }
+
+      .user {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 500;
+        cursor: pointer;
+
+        img {
+          width: 30px;
+          height: 30px;
+          border-radius: 50%;
+          object-fit: cover;
+        }
+      }
+    }
+
+    @include mobile {
+      .middle {
+        margin: 0 5px 0 5px;
+      }
+
+      .right {
+        gap: 10px;
+      }
+    }
+
+    // Hover effects
+    .icon:hover {
+      color: themed("accent");
+    }
+
+    .search:hover {
+      border-color: themed("accent");
+    }
+  }
+}

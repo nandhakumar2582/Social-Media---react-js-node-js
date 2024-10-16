@@ -1,0 +1,72 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+$themes: (
+  light: (
+    textColor: #333333, // Dark gray
+    bg: #ffffff, // White
+    logo: #8a2be2, // Purple color
+    accent: #ff6347, // Coral
+    bgSoft: #f6f3f3,
+    textColorSoft: #555,
+    border: #ccc,
+    likeColor: #ff6347, // Coral (like item color)
+    likeColorHover: #ff6347, // Coral (like item hover color)
+    commentColor: #00bfff, // Deep sky blue (comment item color)
+    commentColorHover: #00bfff, // Deep sky blue (comment item hover color)
+    shareColor: #8a2be2, // Purple (share item color)
+    shareColorHover: #8a2be2, // Purple (share item hover color)
+  ),
+  dark: (
+    textColor: #dddddd, // Light gray
+    bg: #222222, // Dark gray
+    logo: #ff69b4, // Pink
+    accent: #00bfff, // Deep sky blue
+    bgSoft: #333333,
+    textColorSoft: #999999,
+    border: #444444,
+    likeColor: #ff6347, // Coral (like item color)
+    likeColorHover: #ff6347, // Coral (like item hover color)
+    commentColor: #00bfff, // Deep sky blue (comment item color)
+    commentColorHover: #00bfff, // Deep sky blue (comment item hover color)
+    shareColor: #ff69b4, // Pink (share item color)
+    shareColorHover: #ff69b4, // Pink (share item hover color)
+  )
+);
+
+@mixin themify($themes) {
+  @each $theme, $map in $themes {
+    .theme-#{$theme} & {
+      $theme-map: () !global;
+      @each $key, $submap in $map {
+        $value: map-get(map-get($themes, $theme), "#{$key}");
+        $theme-map: map-merge(
+          $theme-map,
+          (
+            $key: $value,
+          )
+        ) !global;
+      }
+      @content;
+      $theme-map: null !global;
+    }
+  }
+}
+
+@function themed($key) {
+  @return map-get($theme-map, $key);
+}
+
+@mixin mobile {
+  @media (max-width: 480px) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (max-width: 960px) {
+    @content;
+  }
+}
